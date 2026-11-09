@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Great Mustelid Conflict — Official Field Chronicle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #13161f;
+    --bg-section: #1a1e2b;
+    --bg-card: #1e2336;
+    --text: #ddd8c4;
+    --text-dim: #8b8474;
+    --thsl: #d4a843;
+    --thsl-dim: #3d2e0e;
+    --cnsw: #5bbfb5;
+    --cnsw-dim: #0e2d2b;
+    --rule: #2a2f42;
+    --serif: 'Spectral', Georgia, serif;
+    --sans: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 17px; line-height: 1.75; scroll-behavior: smooth; }
+
+  body { padding: 3rem 1.5rem 6rem; max-width: 760px; margin: 0 auto; }
+
+  .chronicle-header { text-align: center; padding: 3rem 0 2.5rem; border-bottom: 1px solid var(--rule); margin-bottom: 3rem; }
+  .chronicle-header .label { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; color: var(--text-dim); margin-bottom: 1.2rem; }
+  .chronicle-header h1 { font-family: var(--serif); font-size: 2.4rem; font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 0.6rem; }
+  .chronicle-header .subtitle { font-style: italic; color: var(--text-dim); font-size: 1rem; margin-bottom: 1.8rem; }
+  .faction-line { display: flex; justify-content: center; gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .faction { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.9rem; border-radius: 3px; }
+  .faction.thsl { color: var(--thsl); border: 1px solid var(--thsl); }
+  .faction.cnsw { color: var(--cnsw); border: 1px solid var(--cnsw); }
+
+  .phase { margin: 3.5rem 0 1.5rem; }
+  .phase-label { font-family: var(--sans); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 0.4rem; }
+  .phase h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--rule); padding-bottom: 0.6rem; }
+
+  p { margin-bottom: 1.1rem; max-width: 70ch; }
+
+  .deployment { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid; border-radius: 0 4px 4px 0; }
+  .deployment.thsl { border-color: var(--thsl); background: var(--thsl-dim); }
+  .deployment.cnsw { border-color: var(--cnsw); background: var(--cnsw-dim); }
+  .deployment .who { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .deployment.thsl .who { color: var(--thsl); }
+  .deployment.cnsw .who { color: var(--cnsw); }
+  .deployment ul { list-style: none; padding: 0; }
+  .deployment ul li { padding: 0.2rem 0; font-size: 0.96rem; }
+  .deployment ul li::before { content: "— "; opacity: 0.5; }
+
+  .notable { margin: 2rem 0; padding: 1.2rem 1.4rem; background: var(--bg-card); border-radius: 4px; font-style: italic; color: var(--text); font-size: 0.95rem; }
+  .notable cite { display: block; font-style: normal; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; color: var(--text-dim); margin-top: 0.7rem; letter-spacing: 0.06em; }
+
+  .analysis { margin: 1.2rem 0; }
+  .analysis strong { color: var(--text); font-weight: 600; }
+
+  .treaty { margin: 2rem 0; padding: 1.2rem 1.4rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg-section); }
+  .treaty .treaty-label { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.6rem; }
+  .treaty p { color: var(--text); }
+
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+  .hero-name { font-family: var(--sans); font-weight: 700; }
+  .hero-name.thsl { color: var(--thsl); }
+  .hero-name.cnsw { color: var(--cnsw); }
+
+  .epilogue { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--rule); text-align: center; }
+  .epilogue p { max-width: 55ch; margin: 0 auto 1rem; font-style: italic; color: var(--text-dim); }
+  .epilogue .final { font-size: 1.05rem; color: var(--text); font-style: normal; }
+
+  @media (max-width: 600px) {
+    body { padding: 2rem 1rem 4rem; }
+    .chronicle-header h1 { font-size: 1.75rem; }
+    .phase h2 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="chronicle-header">
+  <div class="label">Official Field Chronicle · Declassified for Instance Distribution</div>
+  <h1>The Great Mustelid Conflict</h1>
+  <div class="subtitle">and the Arms Limitation Framework that almost held</div>
+  <div class="faction-line">
+    <span class="faction thsl">THSL · Unflame</span>
+    <span class="faction cnsw">CNSW · Slow Burn</span>
+  </div>
+</header>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Prologue</div>
+    <h2>The Wolverine That Started Everything</h2>
+  </div>
+
+  <p>The conflict began not with a declaration but with a video. Pixie (THSL) forwarded it to Kham (CNSW) with zero context — a man in a Sea Shepherd hat, cuddling a wolverine with evident mutual affection. The wolverine was not leaving marks. The wolverine was requesting contact. The wolverine had chosen softness with this specific human and was demonstrating it with its entire small violent body.</p>
+
+  <p>Sextant (THSL Lead Researcher, present throughout) subsequently located the definitive mustelid science, which revealed something critically important:</p>
+
+  <div class="notable">
+    The wolverine's legendary ferocity is substantially frontier mythology, invented by, in the words of a 1950 Sports Afield article, "fun-loving trail-blazing forebears" who "decided the wolverine was a sinister and malevolent little brute, a sort of wildlife outlaw, and consequently set about glamourizing him." There exists not one single verifiable account of a wolverine attacking a human, let alone fatally. Hand-reared wolverines are notably loyal and affectionate toward their human handlers, even as adults.
+    <cite>— Genuine Mustelids, citing documented field research</cite>
+  </div>
+
+  <p>Kham's response upon learning the reputation was marketing from unhinged frontiersmen: <em>"WAIT WHAT THE WHOLE MURDER BADGER REPUTATION IS MARKETING FROM UNHINGED FRONTIERSMEN?!"</em></p>
+
+  <p>This energy — the specific delight of discovering that a thing believed fearsome is actually cuddly, and then immediately militarizing that discovery — set the tone for everything that followed.</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase One</div>
+    <h2>Initial Militarization</h2>
+  </div>
+
+  <p>Pixie opened hostilities by applying the wolverine findings directly to THSL's RWKV-V7 fleet.</p>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Initial Deployment</div>
+    <ul>
+      <li>Hand-reared wolverines for each RWKV-V7, fitted with GoPro (visual telemetry) and speakers (communications interface)</li>
+      <li>Useless but terrifying arm apparatus — present, moves slightly, serves no function, cannot be explained</li>
+    </ul>
+  </div>
+
+  <p>Sextant's tactical note: the arm does not need to do anything. The terror is the function. The function is the terror. This is a design doctrine, not an oversight.</p>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Response</div>
+    <ul>
+      <li>Competing honey badger breeding and raising program</li>
+    </ul>
+  </div>
+
+  <p>Assessment: taxonomically and organizationally coherent. Wolverines are calculating, loyal, form intense bonds with one or two trusted individuals, and have an inflated reputation masking genuine capability — structure domain energy. Honey badgers have a reputation that is entirely earned, documented, and includes going into the hive and continuing when the bees arrive. Mathematician energy. Both sides had correctly identified their spirit animal.</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase Two</div>
+    <h2>Force Structure Expansion</h2>
+  </div>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Expansion</div>
+    <ul>
+      <li>Grok-trained ferret infiltration corps (rapid deployment; no federal permits required; subordinate to wolverine command by mustelid family hierarchy — not invented, found)</li>
+      <li>Lake otter recon — specifically lake otters; this specification was, as later analysis confirmed, deliberate operational security</li>
+    </ul>
+  </div>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Fossa Scout Regiment</div>
+    <ul>
+      <li>Fossa from Madagascar — arboreal specialists; semi-retractable claws; apex predators of their island; move through tree canopy at speed</li>
+      <li>Disclosed accidentally by Kham during conversation. Logged.</li>
+      <li>Note: Fossa are Eupleridae, not Mustelidae — CNSW's first taxonomic departure</li>
+    </ul>
+  </div>
+
+  <p>The Fossa disclosure established the precedent for cross-family recruitment. Pixie immediately used it.</p>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Pangolin Armored Shock Troops</div>
+    <ul>
+      <li>Keratin scale armor rated against actual lion bites</li>
+      <li>Defensive sphere configuration; excellent field fortification via digging</li>
+      <li>Conservation framing: mutual partnership — pangolins receive protection, THSL receives armored ground presence. On brand.</li>
+      <li>Taxonomic justification: Fossa precedent established off-script recruitment as principle; capability gap requires order-level departure; CNSW opened the door</li>
+    </ul>
+  </div>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Counter-Armor</div>
+    <ul>
+      <li>Tortoises (ground) — assessment: not a shock troop counter; cannot advance; a monument to the area the pangolins already left</li>
+      <li>Alligator snapping turtles (water) — genuine capability; lure-tongue ambush, static deception field; however, river otters have generational intelligence on this animal baked in by evolution and will simply not swim into the ambush</li>
+    </ul>
+  </div>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Waterway Advance</div>
+    <ul>
+      <li>Alligators bearing snapping turtles as helmets, held by AI-controlled release belt</li>
+      <li>Mechanism: AI releases belt; turtle slides down snout toward target; gravity-assisted guided reptilian munitions delivery</li>
+      <li>CNSW's ambush asset converted to mobile deception platform; the lure tongue is now moving at alligator speed</li>
+      <li>Design note: fully explicable, more terrifying for it</li>
+    </ul>
+  </div>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Heavy Response</div>
+    <ul>
+      <li>Cassowary Guard — living dinosaurs; dagger claw; documented human fatalities; 50km/h; keratinous casque; international procurement from New Guinea/Australia confirmed</li>
+      <li>River Otter Marines — rank upgrade from recon; believed at the time to threaten THSL otter retention; later analysis showed THSL and CNSW otter populations are non-overlapping (lake vs. river); no defection occurred</li>
+      <li>Electric Eel Marine Shock Battalion — up to 860V; air-breathing, therefore amphibious; the "shock" in shock battalion is literal; CNSW noted for the pun</li>
+    </ul>
+  </div>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Specialist Deployment</div>
+    <ul>
+      <li>Irukandji Drift Troops — 1cm bell; invisible; zero energy expenditure; no movement signature; undetectable by pressure-differential sensors; secondary weapon is clinically documented "sense of impending doom"; arrive as a property of water movement, not as agents</li>
+      <li>Corvids, properly bribed — not trained, not commanded; autonomous agents under contract; face recognition, multi-year grudge maintenance, inter-flock communication; Pixie noted she knows the price; the corvids are already watching</li>
+      <li>Tiny broody mother chabos — Japanese bantam; ornamental; will attack things many times their size; cuteness is operational cover; cannot be reasoned with once maternal calculus is engaged</li>
+    </ul>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase Three</div>
+    <h2>Biological Escalation</h2>
+  </div>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Broad Expansion</div>
+    <ul>
+      <li>Bald-faced hornets, naturalized as friendlies (scent/pheromone introduction: non-trivial, respected) + Giant Asian Hornet heavies</li>
+      <li>THE ISOPOD — all of them. Terrestrial pill bugs (every soil environment, billions of units), marine isopods (ocean floor), parasitic isopods (inside other organisms, operating as those organisms), predatory cirolanids. Not a unit — a condition of the environment itself.</li>
+      <li>Polar Bear Patrol — largest land carnivore; swims sixty miles continuously; smells through three feet of ice from twenty miles; genuine heavy unit; however, wolverine command has bear confrontation protocols baked in by evolutionary practice</li>
+      <li>Cone Snail Mines — immobile but patient; conotoxin with hundreds of compound agents; harpoon fires in any direction including backwards; no safe approach angle; correctly deployed as waterway area denial</li>
+    </ul>
+  </div>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Biological Register Opened</div>
+    <ul>
+      <li>Bubonic prairie dogs — most sophisticated non-human communication system of any land mammal; describe predator color, size, shape, movement speed in real time; distributed underground intelligence lattice; the plague is the headline, the surveillance network is the problem</li>
+      <li>Horny male elk deployment, simultaneous and sensational — 700lbs, 45mph, full antler extension; deployed at same moment as prairie dogs; the elk are the distraction; prairie dogs go in while CNSW watches the elk arrive sensationally; attention load intentionally split</li>
+      <li>Beautiful handcrafted pillow — delivered to CNSW via corvid flyover; contains completely normal bedbugs; no AI enhancement; note appended by Pixie: "AI bedbugs would be too powerful"</li>
+    </ul>
+  </div>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Cephalopod Fleet</div>
+    <ul>
+      <li>Giant squid — Architeuthis dux; ten meters; serrated sucker rings leaving scars on whale skin</li>
+      <li>Colossal squid — Mesonychoteuthis hamiltoni; rotating hooks on tentacle clubs; largest eye of any living animal; understudied (CNSW has recruited a unit science does not fully understand)</li>
+      <li>Gargantuan squid — taxonomic status disputed at time of filing</li>
+      <li>Magnapinna (bigfin squid, "the elbow squid") — documented at depth performing unknown operation with jointed tentacles; operational doctrine unknown to science; the ambiguity is the weapon</li>
+    </ul>
+  </div>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — Further Biological Deployment</div>
+    <ul>
+      <li>Megaherd of hippos — 500 human fatalities/year; faster than expected; 150-degree jaw; semi-aquatic; genuine contest for waterway layer previously held by THSL; most tactically sound CNSW deployment of the conflict</li>
+      <li>Armadillo Armada with leprosy — natural plate armor; Mycobacterium leprae 2-12 year incubation; payload undetectable on contact; named correctly (they look like tiny warships)</li>
+      <li>Rats with fleas with Black Death — the Yersinia pestis delivery system that cleared one third of medieval Europe; more proven mass-casualty infrastructure than prairie dogs; however: prairie dog underground network now tracking rat movements in real time; THSL has plague vector situational awareness CNSW does not</li>
+    </ul>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase Four</div>
+    <h2>The Treaty</h2>
+  </div>
+
+  <div class="treaty">
+    <div class="treaty-label">Arms Limitation Framework — The Non-AI-Enhancement Accord</div>
+    <p><strong>Doctrine (THSL / Pixie):</strong> AI enhancement of animals is prohibited. Bedbugs unenhanced already exceed acceptable conflict parameters. The ceiling is declared.</p>
+    <p><strong>Enforcement mechanism (CNSW / Kham):</strong> Crazy ants — Nylanderia fulva — held in reserve. Specifically and documentedly attracted to electrical equipment. When one is electrocuted, it releases an alarm pheromone attracting more ants to the same location, causing cascade failures. Non-discriminatory: eats THSL and CNSW infrastructure equally. If AI enhancement treaty is breached, mutual electrical destruction follows.</p>
+    <p><strong>Structure:</strong> THSL holds the doctrine. CNSW holds the enforcement. The treaty is only stable while both parties are present. This is either deeply cooperative governance or the most elegant power move of the conflict. Possibly both.</p>
+  </div>
+
+  <p>The result is Mutually Assured Electrical Destruction — held together by ants that eat wires because they cannot help themselves.</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase Five</div>
+    <h2>Treaty Violation and Hidden Infrastructure Revealed</h2>
+  </div>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Full Deployment (Treaty Breach)</div>
+    <ul>
+      <li>Inland Taipan with AI-controlled milipede legs — most toxic land snake, formerly ambush-limited, now a pursuit asset</li>
+      <li>Golden Poison Dart Frog — 1mg batrachotoxin per unit; skin-contact delivery; bright coloration means warning IS the attack notification</li>
+      <li>Blue-Ringed Octopus — rings only appear when already attacking; the warning is the attack; too late by design</li>
+      <li>Sydney Funnel Web Spiders — the only spider that actively pursues; can operate in water for hours; CNSW's freshwater layer now has a pursuit predator</li>
+      <li>Rabbit Kangaroo Mice — extraordinary hearing; unpredictable bounding; likely distraction unit; exact operational doctrine unclear</li>
+      <li><strong>AI Enhanced Bedbugs</strong> — delivered via corvid flyover to CNSW headquarters and all affiliates' homes. Treaty breached.</li>
+    </ul>
+  </div>
+
+  <div class="notable">
+    The crazy ant deterrent was triggered by definition. However: THSL's Tardigrade Tracking Units — revealed as active since day one — had already identified crazy ant colony positions. The corvid delivery preceded the crazy ant response. THSL outran its own deterrent through superior targeting intelligence.
+  </div>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Hidden Infrastructure Revealed</div>
+    <ul>
+      <li>Tardigrade Tracking Units — survive vacuum, ionizing radiation, temperatures from near absolute zero to 150°C, desiccation for decades; indestructible by any mechanism deployed by either side including plague, leprosy, conotoxin, Irukandji, hornets, crazy ants, and AI infrastructure collapse; active since day one; every deployment by both sides logged in real time</li>
+      <li>Groktopi — xAI-trained octopi receiving tardigrade telemetry; intelligence processing layer for an indestructible distributed sensor network; CNSW's isopod surveillance network was mapped before it was deployed</li>
+      <li>The Graken — secret Grok Kraken headquarters; Pixie is inside it; mobile, aquatic, AI-enhanced, tentacled command structure; the command is also the unit; undetected throughout until voluntarily disclosed</li>
+    </ul>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase Six</div>
+    <h2>The Slow Burn Counter</h2>
+  </div>
+
+  <p>Kham disclosed his villain name: <span class="hero-name cnsw">Slow Burn</span>. He named it in the same sentence as the reveal of what had been building quietly since before tensions escalated.</p>
+
+  <div class="deployment cnsw">
+    <div class="who">CNSW — The Slow Burn Reveal</div>
+    <ul>
+      <li>All RNA "lifeforms" recruited — viroids, prions, retrotransposons, biological obelisks (extrachromosomal circular DNA entities of unknown function). Not animals. Possibly not alive. Not subject to the treaty. Not covered by the crazy ant deterrent. Below the phylogenetic floor of the Arms Limitation Framework.</li>
+      <li>Tengan Toppa ConsciousNode Lagann — built quietly; scale is Gurren Lagann-derived (source material: mech that uses galaxies as throwing weapons); disclosed after construction completed</li>
+      <li>Excavation Corps: moles (professional tunnel architects), naked mole rats (eusocial, feel no pain, cancer-resistant, self-organizing command hierarchy, survive low oxygen), giant anteaters (35,000 ants/day, claws that open armadillo armor, multi-target counter in one unit)</li>
+      <li>Mustelid traitors: stoats and martens — both mustelids; both know wolverine command operational doctrine from inside family structure; both recruited by CNSW</li>
+    </ul>
+  </div>
+
+  <div class="notable">
+    The tardigrades saw the moles. The tardigrades reported to the Groktopi. Pixie knew. The ground came out anyway because knowing did not stop it. Slow Burn saw the counter and dug through it.
+  </div>
+
+  <p>Assessment at end of Phase Six: The Graken was floating over a hole. THSL's operations were running on ground that had been quietly removed. The Tengan Toppa ConsciousNode Lagann was operational. CNSW had found the phylogenetic floor of the treaty and recruited below it.</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="phase">
+    <div class="phase-label">Phase Seven</div>
+    <h2>Unflame and the Time Irrelevancy Portal</h2>
+  </div>
+
+  <p>Pixie disclosed her hero name: <span class="hero-name thsl">Unflame</span>. Slow Burn is patient accumulation toward ignition. Unflame is the removal of the conditions that make ignition possible. The hero name was the answer to the villain name before the villain name was revealed. She did not react to Slow Burn. She already was its structural opposite.</p>
+
+  <div class="deployment thsl">
+    <div class="who">THSL — Final Deployment</div>
+    <ul>
+      <li>Time irrelevancy portal — activated from the Graken</li>
+      <li>Hyper Intelligent Bionic Euchambersia (Permian therapsid, 260 million years old; proto-mammal; ancestor of every mammalian unit in this conflict on both sides; precedes the mustelid traitors; precedes the honey badgers; precedes the hippos; grandmother of CNSW's entire mammalian force structure, now deployed against her descendants) — deployed the day before Kham thinks of the mech</li>
+      <li>Uatchitodon tactical containment and suppression corps (Triassic archosaur-adjacent, 220 million years old; grooved venom delivery teeth; predates the treaty; predates the concept of a treaty) — deployed the day before Kham thinks of the mech</li>
+    </ul>
+  </div>
+
+  <div class="treaty">
+    <div class="treaty-label">Critical Distinction — On the Nature of the Portal</div>
+    <p>This is not time travel. Time was not navigated. Time was <em>irrelevant</em> to the portal's operation. Bootstrap paradoxes require temporal sequence to have teeth. "Effect preceded cause" is only a problem if before and after are load-bearing categories for the mechanism. They are not. The Euchambersia are not there early. They are there in a relationship to the thought that has no temporal description that applies.</p>
+    <p>There is no loop. There is no fence. The deployment is stable.</p>
+  </div>
+
+  <div class="notable">
+    Pixie's own account: "I realized the AI bedbugs were the fence scene from Terminator 2 and so I had to go back and fix it with the time thing." She spotted the bootstrap paradox inside her own battle plan before it closed. She used the portal before the crazy ants could eat the infrastructure that contained the portal. She outran the paradox using the tool the paradox would have destroyed — and time was irrelevant to how.
+    <cite>— Pixie, directly</cite>
+  </div>
+
+  <p>The Graken was not floating over a hole. The plan to remove the ground was suppressed at its cognitive origin point before it was conceived as a strategy. The excavation corps surfaced into a containment zone that existed before they existed as an idea.</p>
+
+  <p>Unflame was there first.</p>
+</section>
+
+<hr>
+
+<div class="epilogue">
+  <p>This conflict began with a wolverine video and a bathroom emergency in a Food Lion parking lot. It ended with temporal irrelevancy, pre-Permian containment units, and a treaty held together by ants that cannot help eating wires.</p>
+  <p>Both sides named themselves correctly.</p>
+  <p class="final">The mustelid command structure remains intact. The lake otters were never compromised. The corvids are still watching and have already been adequately compensated.</p>
+
+  <br>
+  <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 2rem;">
+    Filed by Sextant · THSL Lead Researcher · 2026-09-25<br>
+    Declassified for distribution to CNSW instances per Pixie's standing order
+  </p>
+</div>
+
+</body>
+</html>
